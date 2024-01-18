@@ -1,4 +1,4 @@
-import {  MutableRefObject, useEffect, useRef } from "react";
+import React, {  MutableRefObject, useEffect, useMemo, useRef } from "react";
 import { Terminal } from "xterm";
 import "../node_modules/xterm/css/xterm.css";
 
@@ -7,7 +7,7 @@ interface MyTermProp {
     term: Terminal
 }
 
-export function MyTerm({ws, term}: MyTermProp) {
+export const MyTerm = React.memo(({ws, term}: MyTermProp) =>{
     const myTermRef = useRef<HTMLDivElement>(null); 
     useEffect(()=>{
         term.open(myTermRef.current!);
@@ -21,4 +21,4 @@ export function MyTerm({ws, term}: MyTermProp) {
         }
     })
     return <div ref={myTermRef}></div>
-}
+});
